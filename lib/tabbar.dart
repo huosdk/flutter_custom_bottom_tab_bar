@@ -22,15 +22,15 @@ class TabContainer extends StatelessWidget implements PreferredSizeWidget {
   /// `decoration`, you can pass the color as the `color` argument to the
   /// `BoxDecoration`.
   TabContainer({
-    Key key,
+    Key? key,
     this.alignment,
     this.padding,
-    Color color,
-    Decoration decoration,
+    Color? color,
+    Decoration? decoration,
     this.foregroundDecoration,
     this.width,
     this.height,
-    BoxConstraints constraints,
+    BoxConstraints? constraints,
     this.margin,
     this.transform,
     this.child,
@@ -39,22 +39,22 @@ class TabContainer extends StatelessWidget implements PreferredSizeWidget {
         assert(decoration == null || decoration.debugAssertIsValid()),
         assert(constraints == null || constraints.debugAssertIsValid()),
         assert(
-            color == null || decoration == null,
-            'Cannot provide both a color and a decoration\n'
+        color == null || decoration == null,
+        'Cannot provide both a color and a decoration\n'
             'The color argument is just a shorthand for "decoration: new BoxDecoration(color: color)".'),
         decoration =
             decoration ?? (color != null ? BoxDecoration(color: color) : null),
         constraints = (width != null || height != null)
             ? constraints?.tighten(width: width, height: height) ??
-                BoxConstraints.tightFor(width: width, height: height)
+            BoxConstraints.tightFor(width: width, height: height)
             : constraints,
         super(key: key);
 
   /// If non-null, requires the child to have exactly this width.
-  double width;
+  double? width;
 
   /// If non-null, requires the child to have exactly this height.
-  double height;
+  double? height;
 
   /// The [child] contained by the container.
   ///
@@ -64,7 +64,7 @@ class TabContainer extends StatelessWidget implements PreferredSizeWidget {
   /// will attempt to be as small as possible.
   ///
   /// {@macro flutter.widgets.child}
-  final Widget child;
+  final Widget? child;
 
   /// Align the [child] within the container.
   ///
@@ -80,24 +80,24 @@ class TabContainer extends StatelessWidget implements PreferredSizeWidget {
   ///    specify an [AlignmentGeometry].
   ///  * [AlignmentDirectional], like [Alignment] for specifying alignments
   ///    relative to text direction.
-  final AlignmentGeometry alignment;
+  final AlignmentGeometry? alignment;
 
   /// Empty space to inscribe inside the [decoration]. The [child], if any, is
   /// placed inside this padding.
   ///
   /// This padding is in addition to any padding inherent in the [decoration];
   /// see [Decoration.padding].
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
 
   /// The decoration to paint behind the [child].
   ///
   /// A shorthand for specifying just a solid color is available in the
   /// constructor: set the `color` argument instead of the `decoration`
   /// argument.
-  final Decoration decoration;
+  final Decoration? decoration;
 
   /// The decoration to paint in front of the [child].
-  final Decoration foregroundDecoration;
+  final Decoration? foregroundDecoration;
 
   /// Additional constraints to apply to the child.
   ///
@@ -105,26 +105,26 @@ class TabContainer extends StatelessWidget implements PreferredSizeWidget {
   /// `constraints` argument to set this property.
   ///
   /// The [padding] goes inside the constraints.
-  final BoxConstraints constraints;
+  final BoxConstraints? constraints;
 
   /// Empty space to surround the [decoration] and [child].
-  final EdgeInsetsGeometry margin;
+  final EdgeInsetsGeometry? margin;
 
   /// The transformation matrix to apply before painting the container.
-  final Matrix4 transform;
+  final Matrix4? transform;
 
   EdgeInsetsGeometry get _paddingIncludingDecoration {
-    if (decoration == null || decoration.padding == null) return padding;
-    final EdgeInsetsGeometry decorationPadding = decoration.padding;
-    if (padding == null) return decorationPadding;
-    return padding.add(decorationPadding);
+    if (decoration == null || decoration!.padding == null) return padding!;
+    final EdgeInsetsGeometry? decorationPadding = decoration!.padding;
+    if (padding == null) return decorationPadding!;
+    return padding!.add(decorationPadding!);
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget current = child;
+    Widget current = child!;
 
-    if (child == null && (constraints == null || !constraints.isTight)) {
+    if (child == null && (constraints == null || !constraints!.isTight)) {
       current = LimitedBox(
           maxWidth: 0.0,
           maxHeight: 0.0,
@@ -132,29 +132,29 @@ class TabContainer extends StatelessWidget implements PreferredSizeWidget {
     }
 
     if (alignment != null)
-      current = Align(alignment: alignment, child: current);
+      current = Align(alignment: alignment!, child: current);
 
     final EdgeInsetsGeometry effectivePadding = _paddingIncludingDecoration;
     if (effectivePadding != null)
       current = Padding(padding: effectivePadding, child: current);
 
     if (decoration != null)
-      current = DecoratedBox(decoration: decoration, child: current);
+      current = DecoratedBox(decoration: decoration!, child: current);
 
     if (foregroundDecoration != null) {
       current = DecoratedBox(
-          decoration: foregroundDecoration,
+          decoration: foregroundDecoration!,
           position: DecorationPosition.foreground,
           child: current);
     }
 
     if (constraints != null)
-      current = ConstrainedBox(constraints: constraints, child: current);
+      current = ConstrainedBox(constraints: constraints!, child: current);
 
-    if (margin != null) current = Padding(padding: margin, child: current);
+    if (margin != null) current = Padding(padding: margin!, child: current);
 
     if (transform != null)
-      current = Transform(transform: transform, child: current);
+      current = Transform(transform: transform!, child: current);
 
     return current;
   }

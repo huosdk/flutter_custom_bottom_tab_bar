@@ -12,49 +12,49 @@ const double _kTextAndIconTabHeight = 72.0;
  */
 class EachTab extends StatelessWidget {
   const EachTab(
-      {Key key,
-      this.text,
-      this.textStyle,
-      this.icon,
-      this.child,
-      this.padding,
-      this.width,
-      this.height,
-      this.color,
-      this.iconPadding,
-      this.badge,
-      this.badgeNo,
-      this.badgeColor})
+      {Key? key,
+        this.text,
+        this.textStyle,
+        this.icon,
+        this.child,
+        this.padding,
+        this.width,
+        this.height,
+        this.color,
+        this.iconPadding,
+        this.badge,
+        this.badgeNo,
+        this.badgeColor})
       : assert(text != null || child != null || icon != null),
         assert(!(text != null &&
             null !=
                 child)), // TODO(goderbauer): https://github.com/dart-lang/sdk/issues/34180
         super(key: key);
 
-  final double width; //这个是宽
-  final double height; //这个是高
-  final EdgeInsetsGeometry iconPadding; // 图片的padding
-  final TextStyle textStyle; //文字的样式
-  final Color color; //整个tab的背景颜色
-  final String text; //文字
+  final double? width; //这个是宽
+  final double? height; //这个是高
+  final EdgeInsetsGeometry? iconPadding; // 图片的padding
+  final TextStyle? textStyle; //文字的样式
+  final Color? color; //整个tab的背景颜色
+  final String? text; //文字
 
-  final Widget child; //子view
+  final Widget? child; //子view
 
-  final Widget icon; //图标
-  final EdgeInsetsGeometry padding; //整个tab的padding
+  final Widget? icon; //图标
+  final EdgeInsetsGeometry? padding; //整个tab的padding
 
   /// the Badge ,used for unread message ...
-  final Widget badge;
+  final Widget? badge;
 
   /// the Badge number , unread message ...
-  final String badgeNo;
+  final String? badgeNo;
 
-  final Color badgeColor; //badge的颜色，未读消息
+  final Color? badgeColor; //badge的颜色，未读消息
 
   Widget _buildLabelText() {
     return child ??
         Text(
-          text,
+          text!,
           softWrap: false,
           overflow: TextOverflow.fade,
           style: textStyle,
@@ -62,11 +62,11 @@ class EachTab extends StatelessWidget {
   }
 
   Widget _buildBadge() {
-    if (badge == null && (badgeNo == null || badgeNo.isEmpty)) {
+    if (badge == null && (badgeNo == null || badgeNo!.isEmpty)) {
       return Container();
     }
     if (badge != null) {
-      return badge;
+      return badge!;
     }
     return Container(
       width: 24,
@@ -77,7 +77,7 @@ class EachTab extends StatelessWidget {
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Text(
-        badgeNo,
+        badgeNo!,
         style: TextStyle(fontSize: 10, color: Colors.white),
       ),
     );
@@ -94,7 +94,7 @@ class EachTab extends StatelessWidget {
       label = _buildLabelText();
     } else if (text == null) {
       newHeight = _kTabHeight;
-      label = icon;
+      label = icon!;
     } else {
       newHeight = _kTextAndIconTabHeight;
       label = Column(
