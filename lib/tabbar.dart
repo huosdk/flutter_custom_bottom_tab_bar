@@ -113,8 +113,8 @@ class TabContainer extends StatelessWidget implements PreferredSizeWidget {
   /// The transformation matrix to apply before painting the container.
   final Matrix4? transform;
 
-  EdgeInsetsGeometry get _paddingIncludingDecoration {
-    if (decoration == null || decoration!.padding == null) return padding!;
+  EdgeInsetsGeometry? get _paddingIncludingDecoration {
+    if (decoration == null || decoration!.padding == null) return padding;
     final EdgeInsetsGeometry? decorationPadding = decoration!.padding;
     if (padding == null) return decorationPadding!;
     return padding!.add(decorationPadding!);

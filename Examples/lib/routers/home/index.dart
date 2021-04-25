@@ -13,7 +13,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   List<String> tabs = [];
-  TabController _tabController;
+  TabController? _tabController;
 
   @override
   void initState() {
@@ -107,7 +107,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       // borderRadius:
                                       // BorderRadius.all(Radius.circular(4)),
                                       border: Border.all(
-                                          width: 2, color: Colors.grey[200]),
+                                          width: 2, color: Colors.grey[200]!),
                                       shape: BoxShape.circle,
                                     ),
                                     child: Container(
@@ -174,7 +174,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     );
   }
 
-  SuperTooltip tooltip;
+  SuperTooltip? tooltip;
   var textStyle = TextStyle(
     fontSize: 14,
     color: Colors.white,
@@ -185,16 +185,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Future<bool> _willPopCallback() async {
     // If the tooltip is open we don't pop the page on a backbutton press
     // but close the ToolTip
-    if (tooltip.isOpen) {
-      tooltip.close();
+    if (tooltip!.isOpen) {
+      tooltip!.close();
       return false;
     }
     return true;
   }
 
   void onTap(BuildContext c) {
-    if (tooltip != null && tooltip.isOpen) {
-      tooltip.close();
+    if (tooltip != null && tooltip!.isOpen) {
+      tooltip!.close();
       return;
     }
 
@@ -305,6 +305,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             ],
           ),
         ));
-    tooltip.show(c);
+    tooltip!.show(c);
   }
 }

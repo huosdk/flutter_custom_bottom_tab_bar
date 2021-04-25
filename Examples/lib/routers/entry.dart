@@ -16,7 +16,7 @@ class Entry extends StatefulWidget {
 }
 
 class EntryState extends State<Entry> with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  TabController? _tabController;
   int _selectedIndex = 0;
   var titles = ['首页', '西瓜视频', '找人', '小视频', '我的'];
   var icons = [
@@ -31,9 +31,9 @@ class EntryState extends State<Entry> with SingleTickerProviderStateMixin {
     super.initState();
     _tabController =
         new TabController(vsync: this, initialIndex: 0, length: titles.length);
-    _tabController.addListener(() {
-      setState(() => _selectedIndex = _tabController.index);
-      print("liucheng-> ${_tabController.indexIsChanging}");
+    _tabController!.addListener(() {
+      setState(() => _selectedIndex = _tabController!.index);
+      print("liucheng-> ${_tabController!.indexIsChanging}");
     });
   }
 
