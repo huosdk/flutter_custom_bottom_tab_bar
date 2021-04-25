@@ -134,7 +134,7 @@ class TabContainer extends StatelessWidget implements PreferredSizeWidget {
     if (alignment != null)
       current = Align(alignment: alignment!, child: current);
 
-    final EdgeInsetsGeometry effectivePadding = _paddingIncludingDecoration;
+    final EdgeInsetsGeometry? effectivePadding = _paddingIncludingDecoration;
     if (effectivePadding != null)
       current = Padding(padding: effectivePadding, child: current);
 

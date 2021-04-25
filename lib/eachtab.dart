@@ -117,7 +117,7 @@ class EachTab extends StatelessWidget {
         child: Center(
           child: Stack(
             fit: StackFit.passthrough,
-            overflow: Overflow.visible,
+            clipBehavior: Clip.none,
             children: <Widget>[
               Positioned(right: 4, top: 4, child: _buildBadge()),
               Container(
